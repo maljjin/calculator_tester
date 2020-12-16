@@ -4,7 +4,7 @@ Library    BuiltIn
 Resource    basic.resource
 resource    error_cases.resource
 Suite Setup    Open Browser    browser=chrome    url=http://jsbin.com/hudape/1/
-#Suite Teardown   Close Browser
+Suite Teardown   Close Browser
 
 *** Variables ***
 @{numbers}    0   1   2   3   4   5   6   7   8   9
