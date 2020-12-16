@@ -11,7 +11,7 @@ The following software and utilities should be installed locally to use this sui
 - Chrome browser and the appropriate chromedriver
 
 # Usage
-Robot suites can be used from your command line utility. The general command is very simple : robot calculator_tester.robot . Many optional parameters can be used as described in the Robot documentation. For example, you can run a subset of tests by using the tag system (e.g.: robot --include regression calculator_tester.robot ). The framework also comes with the Robot utility allowing you to customize your logs. 
+Robot suites can be used from your command line utility. The general command is very simple : robot calculator_tester.robot . Many optional parameters can be used as described in the Robot documentation. For example, you can run a subset of tests by using the tag system (e.g.: robot --include regression calculator_tester.robot ; it will run only the tests tagged as regression). The framework also comes with the Rebot utility allowing you to customize your logs. 
 
 # Limitations
 - The calculator app doesn't have a button to clear the data from the input field. This testing suite uses heavily the Reload Page keyword from Selenium as a workaround.
