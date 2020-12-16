@@ -84,6 +84,17 @@ Multiplication Double Negative Checker
   ${target} =   Evaluate    str(${num1} * ${num2})
   Element Should Contain    //html/body/div/div[2]    ${target}
 
+Exponent Checker
+  [Documentation]   Function to validate the exponentiation
+  [Arguments]   ${num1}   ${num2}
+  Click Button    ${num1}
+  Click Button    MULT
+  Click Button    MULT
+  Click Button    ${num2}
+  Click Button    EQ
+  ${target} =   Evaluate    str(${num1} ** ${num2})
+  Element Should Contain    //html/body/div/div[2]    ${target}
+
 Division Checker
   [Documentation]   Function to validate the division of two single digit numbers
   [Arguments]   ${num1}   ${num2}
@@ -105,5 +116,74 @@ Division Double Negative Checker
   ${num2_button} =    Get Substring   ${num2}    1
   Click Button    ${num2_button}
   Click Button    EQ
-  ${target} =   Evaluate    str(int(${num1} / ${num2}))
+  ${target} =   Evaluate    str(${num1} // ${num2})
+  Element Should Contain    //html/body/div/div[2]    ${target}
+
+Generic Operator
+  [Documentation]   General formula to compose complex operations
+  [Arguments]   ${num}    ${action}
+  Click Button    ${num}
+  Click Button    ${action}
+
+Multiplication over Addition
+  [Documentation]   Multiplication should have priority over addition
+  [Arguments]   ${num1}   ${num2}   ${num3}
+  Click Button    ${num1}
+  Click Button    PLUS
+  Click Button    ${num2}
+  Click Button    MULT
+  Click Button    ${num3}
+  Click Button    EQ
+  ${target} =   Evaluate    str(${num1} + ${num2} * ${num3})
+  Element Should Contain    //html/body/div/div[2]    ${target}
+
+Division over Addition
+  [Documentation]   Division should have priority over addition
+  [Arguments]   ${num1}   ${num2}   ${num3}
+  Click Button    ${num1}
+  Click Button    PLUS
+  Click Button    ${num2}
+  Click Button    DIV
+  Click Button    ${num3}
+  Click Button    EQ
+  ${target} =   Evaluate    str(${num1} + ${num2} // ${num3})
+  Element Should Contain    //html/body/div/div[2]    ${target}
+
+Exponentiation over Multiplication
+  [Documentation]   Exponentiation should have priority over multiplication
+  [Arguments]   ${num1}   ${num2}   ${num3}
+  Click Button    ${num1}
+  Click Button    MULT
+  Click Button    ${num2}
+  Click Button    MULT
+  Click Button    MULT
+  Click Button    ${num3}
+  Click Button    EQ
+  ${target} =   Evaluate    str(${num1} * ${num2} ** ${num3})
+  Element Should Contain    //html/body/div/div[2]    ${target}
+
+Addition and Subtraction
+  [Documentation]   Addition and subtraction have the same order and should be done sequentially
+  [Arguments]   ${num1}   ${num2}   ${num3}
+  Click Button    ${num1}
+  Click Button    PLUS
+  Click Button    ${num2}
+  Click Button    MINUS
+  Click Button    ${num3}
+  Click Button    EQ
+  ${target} =   Evaluate    str(${num1} + ${num2} - ${num3})
+  Element Should Contain    //html/body/div/div[2]    ${target}
+
+Three Operations 
+  [Documentation]   Validation of the sequence of trois operations (addition, multiplication, subtraction)
+  [Arguments]   ${num1}   ${num2}   ${num3}   ${num4}
+  Click Button    ${num1}
+  Click Button    PLUS
+  Click Button    ${num2}
+  Click Button    MULT
+  Click Button    ${num3}
+  Click Button    MINUS
+  Click Button    ${num4}
+  Click Button    EQ
+  ${target} =   Evaluate    str(${num1} + ${num2} * ${num3} - ${num4})
   Element Should Contain    //html/body/div/div[2]    ${target}
